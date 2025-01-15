@@ -1,19 +1,14 @@
--- buffer/relative line number
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.o.statuscolumn = "%s %l %=%r "
-
--- set leader key
 vim.g.mapleader = " "
-
--- netrw directory listing
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("v", "y", '"+y')	-- copy to system clipboard (visual)
 
--- copy to system clipboard (visual)
-vim.keymap.set("v", "y", '"+y', opt)
+-- move line
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
---comment/uncomment
-local set_comment = require("nielwyn.set-comment")
-vim.api.nvim_create_user_command("SetComment", set_comment.set, { range = true })
-vim.keymap.set("v", "<leader>/", ":SetComment<CR>")
-vim.keymap.set("n", "<leader>/", ":SetComment<CR>")
+-- search term stay in middle
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- put operator replace line
+--vim.keymap.set("x", "<leader>p", "\"_dP")
