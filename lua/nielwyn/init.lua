@@ -1,7 +1,7 @@
 -- autocommand to redraw the status column on specific events
 vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
-    pattern = "*",
-    command = "redrawstatus"
+	pattern = "*",
+	command = "redrawstatus"
 })
 
 -- comment/uncomment
@@ -35,5 +35,6 @@ end
 vim.api.nvim_create_user_command("SetComment", set_comment.set, {range = true})
 vim.keymap.set("n", "<leader>/", ":SetComment<CR>")
 
--- import remap
+-- import
+require("nielwyn.set")
 require("nielwyn.remap")
