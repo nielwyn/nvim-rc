@@ -36,5 +36,5 @@ vim.api.nvim_create_user_command("SetComment", set_comment.set, {range = true})
 vim.keymap.set("n", "<leader>/", ":SetComment<CR>")
 
 -- import
-require("nielwyn.set")
-require("nielwyn.remap")
+require("nielwyn.options")
+require("nielwyn.remaps")
