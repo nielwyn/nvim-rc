@@ -10,5 +10,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
+
 -- status column format
-vim.o.statuscolumn = "%s %l %=%r "
+vim.o.statuscolumn = " %s%l %=%r "

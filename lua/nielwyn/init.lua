@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd({"InsertLeave", "TextChanged"}, {
 })
 
 -- comment/uncomment
-local set_comment = {}
+--[[ local set_comment = {}
 local default_line_comment = "//"
 local non_c_line_comments_by_filetype = {
 	lua = "--",
@@ -33,7 +33,7 @@ function set_comment.set(opts)
 	vim.api.nvim_buf_set_lines(0, start - 1, finish, false, lines)
 end
 vim.api.nvim_create_user_command("SetComment", set_comment.set, {range = true})
-vim.keymap.set("n", "<leader>/", ":SetComment<CR>")
+vim.keymap.set("n", "<leader>/", ":SetComment<CR>") ]]
 
 -- import
 require("nielwyn.options")
