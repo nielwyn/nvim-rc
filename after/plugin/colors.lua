@@ -23,13 +23,13 @@ require('kanagawa').setup({
 	},
 })
 
--- setup must be called before loading
+-- Setup must be called before loading
 vim.cmd("colorscheme kanagawa")
 
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#AAAAAA', bold=true })
 vim.api.nvim_set_hl(0, 'LineNr', { fg='#FB508F', bold=true })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#AAAAAA' })
-vim.api.nvim_set_hl(0, 'signcolumn', { bg='NONE'})
+vim.api.nvim_set_hl(0, 'SignColumn', { bg='NONE'})
 
 -- Set GitSigns symbol colors
 vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#A3D99B', bg = 'NONE' })

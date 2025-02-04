@@ -7,10 +7,13 @@ vim.keymap.set("n", "<leader>e", function ()
 		vim.cmd.Ex()
 	end
 end)
+vim.keymap.set("n", "<leader>be", function ()
+	require("mini.files").open(vim.api.nvim_buf_get_name(0))
+end )
 vim.keymap.set("n", "y", '"+y')
 vim.keymap.set("n", "Y", '"+Y')
 vim.keymap.set("v", "y", '"+y')
-vim.keymap.set("n", "Q", "<Nop>")
+vim.keymap.set("n", "q", "<Nop>")
 
 -- move whole line
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
