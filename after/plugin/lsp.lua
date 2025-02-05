@@ -1,3 +1,27 @@
+require("mason").setup({
+	ui = {
+		icons = {
+			package_installed = "✓",
+			package_pending = "➜",
+			package_uninstalled = "✗"
+		}
+	}
+})
+
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		'clangd',
+		'cmake',
+		'lua_ls',
+		'html',
+		'htmx',
+		'remark_ls',
+		'cssls',
+		'ts_ls',
+		'jsonls'
+	}
+})
+
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
 -- This should be executed before configure any language server
 local lspconfig_defaults = require('lspconfig').util.default_config
@@ -26,14 +50,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
-require('lspconfig').lua_ls.setup({})
-require('lspconfig').ts_ls.setup({})
-
 local cmp = require('cmp')
 cmp.setup({
 	sources = {
 		{name = 'nvim_lsp'},
 		{name = 'buffer'},
+		{name = 'path'}
 	},
 	snippet = {
 		expand = function(args)

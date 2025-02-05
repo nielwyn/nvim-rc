@@ -10,10 +10,12 @@ end)
 vim.keymap.set("n", "<leader>be", function ()
 	require("mini.files").open(vim.api.nvim_buf_get_name(0))
 end )
-vim.keymap.set("n", "y", '"+y')
 vim.keymap.set("n", "Y", '"+Y')
 vim.keymap.set("v", "y", '"+y')
 vim.keymap.set("n", "q", "<Nop>")
+
+-- disalbe clipboard copy after delete operator
+vim.keymap.set({'n', 'v'}, 'x', '"_x')
 
 -- move whole line
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -23,5 +25,5 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
--- put operator replace line
+-- make put operator replace line
 --vim.keymap.set("x", "<leader>p", "\"_dP")

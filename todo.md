@@ -1,4 +1,5 @@
-Restore last section
-Enhance fuzzy-finder
-add trouble
+vim-tmux-navigator
+formatter
+linter
 vim-surround
+enhance fuzzy-finder
