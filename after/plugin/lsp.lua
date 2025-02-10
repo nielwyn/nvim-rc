@@ -12,24 +12,22 @@ require("mason-lspconfig").setup({
 	ensure_installed = {
 		'clangd',
 		'cmake',
+		'vimls',
 		'lua_ls',
 		'html',
 		'htmx',
 		'remark_ls',
 		'cssls',
 		'ts_ls',
-		'jsonls'
+		'jsonls',
+		'ast_grep',
 	}
 })
 
 -- Add cmp_nvim_lsp capabilities settings to lspconfig
 -- This should be executed before configure any language server
 local lspconfig_defaults = require('lspconfig').util.default_config
-lspconfig_defaults.capabilities = vim.tbl_deep_extend(
-'force',
-lspconfig_defaults.capabilities,
-require('cmp_nvim_lsp').default_capabilities()
-)
+lspconfig_defaults.capabilities = vim.tbl_deep_extend('force', lspconfig_defaults.capabilities, require('cmp_nvim_lsp').default_capabilities())
 
 -- This is where to enable features that only work
 -- if there is a language server active in the file
@@ -49,6 +47,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 	end,
 })
+
+require('lspconfig').clangd.setup({})
+require('lspconfig').cmake.setup({})
+require('lspconfig').vimls.setup({})
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').html.setup({})
+require('lspconfig').remark_lss.setup({})
+require('lspconfig').cssls.setup({})
+require('lspconfig').ts_ls.setup({})
+require('lspconfig').jsonls.setup({})
+require('lspconfig').ast_grep.setup({})
 
 local cmp = require('cmp')
 cmp.setup({

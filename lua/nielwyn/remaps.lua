@@ -27,3 +27,11 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- make put operator replace line
 --vim.keymap.set("x", "<leader>p", "\"_dP")
+
+-- copy buffer path
+vim.api.nvim_create_user_command("Cppath", function()
+    local path = vim.fn.expand("%:p")
+    vim.fn.setreg("+", path)
+    vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {}) 
+vim.keymap.set('n', '<leader>cp', ':Cppath<CR>', { noremap = true, silent = true })
