@@ -1,18 +1,18 @@
 require('fzf-lua').setup({
-	winopts = {
+	defaults = {
+		formatter = "path.filename_first",
+	},
+	winopts  = {
 		height = 0.9,
 		width = 0.9,
 		preview = {
 			layout = "vertical",
 		}
 	},
-	files = {
-		formatter = "path.filename_first", -- places file name first
-	},
-
 })
 
 local fzf = require('fzf-lua')
+vim.keymap.set('n', '<leader>fr', fzf.resume, { desc = 'fzf resume' })
 vim.keymap.set('n', '<leader>ff', fzf.files, { desc = 'fzf `find` or `fd` on a path' })
 vim.keymap.set('n', '<leader>fg', fzf.grep, { desc = 'fzf search with grep or rg pattern' })
 vim.keymap.set('n', '<leader>fc', fzf.grep_cword, { desc = 'fzf search word under cursor' })
