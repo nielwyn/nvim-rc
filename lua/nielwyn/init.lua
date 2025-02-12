@@ -1,6 +1,7 @@
 -- autocommand to redraw the status column on InsertLeave and TextChanged
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, { pattern = "*", command = "redrawstatus" })
 
+-- for persistent undotree
 if vim.fn.has("persistent_undo") then
 	local target_path = vim.fn.expand('~/.undodir')
 
@@ -13,5 +14,6 @@ if vim.fn.has("persistent_undo") then
 	vim.opt.undofile = true
 end
 
+-- import
 require("nielwyn.options")
 require("nielwyn.remaps")

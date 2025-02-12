@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", function ()
+vim.keymap.set("n", "<leader>e", function()
 	local mini_files = require("mini.files")
 	if mini_files.open then
 		mini_files.open()
@@ -7,15 +7,16 @@ vim.keymap.set("n", "<leader>e", function ()
 		vim.cmd.Ex()
 	end
 end)
-vim.keymap.set("n", "<leader>be", function ()
+vim.keymap.set("n", "<leader>be", function()
 	require("mini.files").open(vim.api.nvim_buf_get_name(0))
-end )
+end)
 vim.keymap.set("n", "Y", '"+Y')
 vim.keymap.set("v", "y", '"+y')
 vim.keymap.set("n", "q", "<Nop>")
+vim.keymap.set("v", "Q", "<Nop>")
 
 -- disalbe clipboard copy after delete operator
-vim.keymap.set({'n', 'v'}, 'x', '"_x')
+vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
 
 -- move whole line
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -30,8 +31,8 @@ vim.keymap.set("n", "N", "Nzzzv")
 
 -- copy buffer path
 vim.api.nvim_create_user_command("Cppath", function()
-    local path = vim.fn.expand("%:p")
-    vim.fn.setreg("+", path)
-    vim.notify('Copied "' .. path .. '" to the clipboard!')
-end, {}) 
-vim.keymap.set('n', '<leader>cp', ':Cppath<CR>', { noremap = true, silent = true })
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	vim.notify('Copied "' .. path .. '" to the clipboard!')
+end, {})
+vim.keymap.set('n', '<leader>cp', ':Cppath<CR>')
