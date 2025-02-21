@@ -1,7 +1,7 @@
 vim.cmd[[colorscheme tokyonight-night]]
 --
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#AAAAAA', bold=true })
-vim.api.nvim_set_hl(0, 'LineNr', { fg='#FB508F', bold=true })
+vim.api.nvim_set_hl(0, 'LineNr', { fg='#FAE033', bold=true })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#AAAAAA' })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg='NONE'})
 
