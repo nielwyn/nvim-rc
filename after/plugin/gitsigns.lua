@@ -23,6 +23,6 @@ gitsigns.setup {
 		delay = 0,
 	},
 	on_attach = function()
-		vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk_inline)
+		vim.keymap.set('n', '<leader>ph', gitsigns.preview_hunk)
 	end
 }
