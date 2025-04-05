@@ -11,13 +11,10 @@ vim.keymap.set("n", "<leader>be", function()
 	require("mini.files").open(vim.api.nvim_buf_get_name(0))
 end)
 vim.keymap.set("n", "Y", '"+Y')
-vim.keymap.set("v", "y", '"+y')
 vim.keymap.set("v", "Y", '"+Y')
-vim.keymap.set("v", "d", '"+d')
-vim.keymap.set("v", "D", '"+D')
 
 vim.keymap.set("n", "q", "<Nop>")
-vim.keymap.set("n", "q", "<Nop>")
+vim.keymap.set("v", "q", "<Nop>")
 
 -- disalbe clipboard copy after delete operator
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x')

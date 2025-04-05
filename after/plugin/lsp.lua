@@ -21,6 +21,7 @@ require("mason-lspconfig").setup({
 		'ts_ls',
 		'jsonls',
 		'ast_grep',
+		'pyright',
 	}
 })
 
@@ -59,6 +60,7 @@ require('lspconfig').cssls.setup({})
 require('lspconfig').ts_ls.setup({})
 require('lspconfig').jsonls.setup({})
 require('lspconfig').ast_grep.setup({})
+require('lspconfig').pyright.setup({})
 
 local cmp = require('cmp')
 cmp.setup({
