@@ -11,7 +11,6 @@ require("mason").setup({
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		'clangd',
-		'cmake',
 		'vimls',
 		'lua_ls',
 		'html',
@@ -51,11 +50,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 require('lspconfig').clangd.setup({})
-require('lspconfig').cmake.setup({})
 require('lspconfig').vimls.setup({})
 require('lspconfig').lua_ls.setup({})
 require('lspconfig').html.setup({})
-require('lspconfig').remark_lss.setup({})
 require('lspconfig').cssls.setup({})
 require('lspconfig').ts_ls.setup({})
 require('lspconfig').jsonls.setup({})

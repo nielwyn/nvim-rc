@@ -6,22 +6,40 @@ conform.setup({
 		typescript = { "prettier" },
 		javascriptreact = { "prettier" },
 		typescriptreact = { "prettier" },
-		svelte = { "prettier" },
 		css = { "prettier" },
 		html = { "prettier" },
 		json = { "prettier" },
 		yaml = { "prettier" },
-		markdown = { "prettier" },
-		graphql = { "prettier" },
-		liquid = { "prettier" },
 		lua = { "stylua" },
 		python = { "isort", "black" },
+	},
+	opts = {
+		-- Define formatters
+		formatters_by_ft = {
+			lua = { "stylua" },
+			python = { "isort", "black" },
+			javascript = { "prettierd", "prettier", stop_after_first = true },
+		},
+		-- Set default options
+		default_format_opts = {
+			lsp_format = "fallback",
+		},
+		-- Customize formatters
+		formatters = {
+			shfmt = {
+				prepend_args = { "-i", "2" },
+			},
+		},
 	},
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>bf", function()
-	conform.format({
-		lsp_fallback = true,
-		async = false,
-	})
-end)
+           require("conform").format({ async = true }, function(err)
+    if not err then
+      local mode = vim.api.nvim_get_mode().mode
+      if vim.startswith(string.lower(mode), "v") then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+      end
+    end
+  end)
+end, { desc = "Format code" })

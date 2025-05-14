@@ -1,1 +1,5 @@
-return { "stevearc/conform.nvim" }
+return {
+	"stevearc/conform.nvim",
+	event = { "BufWritePre" },
+	cmd = { "ConformInfo" },
+}
