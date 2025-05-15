@@ -34,7 +34,7 @@ conform.setup({
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>bf", function()
-           require("conform").format({ async = true }, function(err)
+	require("conform").format({ async = true }, function(err)
     if not err then
       local mode = vim.api.nvim_get_mode().mode
       if vim.startswith(string.lower(mode), "v") then

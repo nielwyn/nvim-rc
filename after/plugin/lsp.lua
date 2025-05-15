@@ -30,6 +30,14 @@ local lspconfig_defaults = require('lspconfig').util.default_config
 lspconfig_defaults.capabilities = vim.tbl_deep_extend('force', lspconfig_defaults.capabilities,
 	require('cmp_nvim_lsp').default_capabilities())
 
+require('lspconfig').prettierd.setup {
+  settings = {
+    useTabs = true,
+    tabWidth = 4,
+    printWidth = 80,
+  },
+}
+
 -- This is where to enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -62,15 +70,20 @@ require('lspconfig').pyright.setup({})
 local cmp = require('cmp')
 cmp.setup({
 	sources = {
-		{ name = 'nvim_lsp' },
+		{ name = "path", priority_weight = 110 },
+		{ name = "nvim_lsp", max_item_count = 20, priority_weight = 100 },
+		{ name = "nvim_lua", priority_weight = 90 },
 		{ name = 'buffer' },
-		{ name = 'path' }
 	},
 	snippet = {
 		expand = function(args)
 			vim.snippet.expand(args.body) -- Need Neovim v0.10 to use vim.snippet
 		end,
 	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+  },
 	mapping = cmp.mapping.preset.insert({
 		-- Simple tab complete
 		['<Tab>'] = cmp.mapping(function(fallback)
@@ -84,7 +97,7 @@ cmp.setup({
 			end
 		end, { 'i', 's' }),
 		-- Go to previous item
-		['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }),
+		['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }, { 'i', 's' }),
 		['<CR>'] = cmp.mapping.confirm({ select = true }),
 	}),
 	completion = {

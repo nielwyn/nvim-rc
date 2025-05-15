@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+
 vim.keymap.set("n", "<leader>e", function()
 	local mini_files = require("mini.files")
 	if mini_files.open then
@@ -10,6 +11,7 @@ end)
 vim.keymap.set("n", "<leader>be", function()
 	require("mini.files").open(vim.api.nvim_buf_get_name(0))
 end)
+
 vim.keymap.set("n", "y", '"+y')
 vim.keymap.set("v", "y", '"+y')
 vim.keymap.set("n", "Y", '"+Y')
@@ -39,3 +41,6 @@ vim.api.nvim_create_user_command("Cppath", function()
 	vim.notify('Copied "' .. path .. '" to the clipboard!')
 end, {})
 vim.keymap.set('n', '<leader>py', ':Cppath<CR>')
+
+vim.keymap.set("v", "<", "<gv", { noremap = true, desc = "Indent and keep selection" })
+vim.keymap.set("v", ">", ">gv", { noremap = true, desc = "Outdent and keep selection" })
