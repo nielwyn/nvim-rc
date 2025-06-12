@@ -1,21 +1,44 @@
--- basic options
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-vim.opt.scrolloff = 9
-vim.opt.updatetime = 50
-vim.opt.signcolumn = 'yes'
-vim.opt.tabstop = 2
-vim.opt.softtabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
-
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.foldlevelstart = 99
+vim.opt.whichwrap:append "<>[]hl"
 
--- status column format
-vim.o.statuscolumn = " %s%l %=%r "
+local options = {
+  statuscolumn = " %s%l %=%r ",
+  foldlevelstart = 99,
+  breakindent = true,
+  hlsearch = false,
+  incsearch = true,
+  softtabstop = 2,
+  laststatus = 3, -- global statusline
+  backup = false, -- creates a backup file
+  conceallevel = 0, -- so that `` is visible in markdown files
+  fileencoding = "utf-8", -- the encoding written to a file
+  hidden = true, -- required to keep multiple buffers and open multiple buffers
+  ignorecase = true, -- ignore case in search patterns
+  mouse = "a", -- allow the mouse to be used in neovim
+  showmode = false, -- we don't need to see things like -- INSERT -- anymore
+  smartcase = true, -- smart case
+  smartindent = true, -- make indenting smarter again
+  splitbelow = true, -- force all horizontal splits to go below current window
+  splitright = true, -- force all vertical splits to go to the right of current window
+  swapfile = true, -- creates a swapfile
+  timeoutlen = 500, -- time to wait for a mapped sequence to complete (in milliseconds)
+  updatetime = 100, -- faster completion (4000ms default)
+  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
+  expandtab = true, -- convert tabs to spaces
+  shiftwidth = 2, -- the number of spaces inserted for each indentation
+  tabstop = 2, -- insert 2 spaces for a tab
+  relativenumber = true, -- set relative numbered lines
+  numberwidth = 5, -- set number column width to 4 {default 4}
+  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
+  wrap = false, -- display lines as one long line
+  scrolloff = 9, -- minimal number of columns to scroll horizontally.
+  sidescrolloff = 9, -- minimal number of screen columns
+  lazyredraw = false, -- Won't be redrawn while executing macros, register and other commands.
+  termguicolors = true, -- Enables 24-bit RGB color in the TUI
+  fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "", lastline = " " }, -- make EndOfBuffer invisible
+}
 
-vim.o.breakindent = true
+for name, value in pairs(options) do
+  vim.opt[name] = value
+end
