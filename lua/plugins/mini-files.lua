@@ -1,1 +1,1 @@
-return { 'echasnovski/mini.files', version = false }
+return { 'echasnovski/mini.files' }

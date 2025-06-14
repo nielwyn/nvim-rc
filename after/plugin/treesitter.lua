@@ -2,7 +2,6 @@ require 'nvim-treesitter.configs'.setup {
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "javascript", "typescript", "rust" },
   sync_install = false,
   auto_install = true,
-  ignore_install = { "javascript" },
   highlight = {
     enable = true,
     disable = function(_, buf)
@@ -20,3 +19,6 @@ require 'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'

@@ -5,7 +5,6 @@ tmux-nvim ui bug
 optimize for performance 
 ---Optional---
 nvim-dap
-vim-matchup
 vim-visual-multi
 
 

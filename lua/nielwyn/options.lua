@@ -1,42 +1,60 @@
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.whichwrap:append "<>[]hl"
 
 local options = {
-  statuscolumn = " %s%l %r",
-  foldlevelstart = 99,
-  breakindent = true,
-  hlsearch = false,
-  incsearch = true,
-  softtabstop = 2,
-  laststatus = 3, -- global statusline
-  backup = false, -- creates a backup file
-  conceallevel = 0, -- so that `` is visible in markdown files
-  fileencoding = "utf-8", -- the encoding written to a file
-  hidden = true, -- required to keep multiple buffers and open multiple buffers
-  ignorecase = true, -- ignore case in search patterns
-  mouse = "a", -- allow the mouse to be used in neovim
-  showmode = false, -- we don't need to see things like -- INSERT -- anymore
-  smartcase = true, -- smart case
-  smartindent = true, -- make indenting smarter again
-  splitbelow = true, -- force all horizontal splits to go below current window
-  splitright = true, -- force all vertical splits to go to the right of current window
-  swapfile = true, -- creates a swapfile
-  timeoutlen = 500, -- time to wait for a mapped sequence to complete (in milliseconds)
-  updatetime = 100, -- faster completion (4000ms default)
-  writebackup = false, -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
-  expandtab = true, -- convert tabs to spaces
-  shiftwidth = 2, -- the number of spaces inserted for each indentation
-  tabstop = 2, -- insert 2 spaces for a tab
-  relativenumber = true, -- set relative numbered lines
-  numberwidth = 5, -- set number column width to 4 {default 4}
-  signcolumn = "yes", -- always show the sign column, otherwise it would shift the text each time
-  wrap = false, -- display lines as one long line
-  scrolloff = 9, -- minimal number of columns to scroll horizontally.
-  sidescrolloff = 9, -- minimal number of screen columns
-  lazyredraw = false, -- Won't be redrawn while executing macros, register and other commands.
-  termguicolors = true, -- Enables 24-bit RGB color in the TUI
-  fillchars = { eob = " ", fold = " ", foldopen = "", foldsep = " ", foldclose = "", lastline = " " }, -- make EndOfBuffer invisible
+  -- UI and Status
+  statuscolumn      = " %s%l %r",      -- Custom status column (requires Neovim 0.9+)
+  laststatus        = 3,               -- Global statusline
+
+  -- Folds and Indents
+  foldlevelstart    = 99,              -- Open all folds by default
+  breakindent       = true,            -- Enable break indent
+  softtabstop       = 2,               -- Number of spaces per <Tab> in insert mode
+  shiftwidth        = 2,               -- Number of spaces for each indentation
+  tabstop           = 2,               -- Number of spaces that a <Tab> in the file counts for
+
+  -- Search
+  hlsearch          = false,           -- Don't highlight search results
+  incsearch         = true,            -- Show search matches as you type
+  ignorecase        = true,            -- Ignore case in search patterns
+  smartcase         = true,            -- Override ignorecase if search contains capitals
+
+  -- File Handling
+  backup            = false,           -- Don't create backup files
+  swapfile          = true,            -- Create swapfiles
+  writebackup       = false,           -- Don't allow editing files opened elsewhere
+  fileencoding      = "utf-8",         -- File encoding written to disk
+  conceallevel      = 0,               -- Show all text in markdown
+
+  -- Buffers and Windows
+  hidden            = true,            -- Allow background buffers
+  splitbelow        = true,            -- Horizontal splits open below
+  splitright        = true,            -- Vertical splits open to the right
+
+  -- Mouse and UI
+  mouse             = "a",             -- Enable mouse in all modes
+  showmode          = false,           -- Don't show -- INSERT -- etc.
+  relativenumber    = true,            -- Show relative line numbers
+  numberwidth       = 5,               -- Set line number column width
+  signcolumn        = "yes",           -- Always show sign column
+  wrap              = false,           -- Don't wrap lines
+  scrolloff         = 9,               -- Minimal number of screen lines above/below cursor
+  sidescrolloff     = 9,               -- Minimal number of screen columns to the side of cursor
+
+  -- Performance
+  timeoutlen        = 500,             -- Time in ms to wait for a mapped sequence
+  updatetime        = 100,             -- Faster completion
+  lazyredraw        = false,           -- Don't lazy redraw (default false)
+
+  -- Appearance
+  termguicolors     = true,            -- Enable GUI colors in terminal
+  fillchars         = {                -- Customize fill characters
+    eob        = " ",                  -- Empty buffer lines
+    fold       = " ",
+    foldopen   = "",
+    foldsep    = " ",
+    foldclose  = "",
+    lastline   = " ",
+  },
 }
 
 for name, value in pairs(options) do

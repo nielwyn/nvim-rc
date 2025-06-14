@@ -41,3 +41,14 @@ vim.keymap.set('n', '<leader>py', ':Cppath<CR>')
 
 vim.keymap.set("v", "<", "<gv", { noremap = true, desc = "Indent and keep selection" })
 vim.keymap.set("v", ">", ">gv", { noremap = true, desc = "Outdent and keep selection" })
+
+vim.keymap.set('n', '<leader>li', function()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  if #clients == 0 then
+    print("No LSP clients attached to this buffer")
+  else
+    for _, client in ipairs(clients) do
+      print("LSP client: " .. client.name)
+    end
+  end
+end, { desc = "Show LSP info" })

@@ -40,6 +40,7 @@ gitsigns.setup {
 
     -- Actions
     vim.keymap.set('n', '<leader>hr', gs.reset_hunk, { buffer = bufnr })
+    vim.keymap.set('n', '<leader>hr', gs.reset_hunk, { buffer = bufnr })
     vim.keymap.set('v', '<leader>hr', function()
       gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
     end, { buffer = bufnr })
