@@ -1,15 +1,12 @@
 vim.g.mapleader = " "
 
 vim.keymap.set("n", "<leader>e", function()
-	local mini_files = require("mini.files")
-	if mini_files.open then
-		mini_files.open()
-	else
-		vim.cmd.Ex()
-	end
-end)
-vim.keymap.set("n", "<leader>be", function()
-	require("mini.files").open(vim.api.nvim_buf_get_name(0))
+  local ok, mini_files = pcall(require, "mini.files")
+  if ok and mini_files.open then
+    mini_files.open()
+  else
+    vim.cmd.Ex()
+  end
 end)
 
 vim.keymap.set("n", "y", '"+y')

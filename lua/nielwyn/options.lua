@@ -3,7 +3,7 @@ vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.opt.whichwrap:append "<>[]hl"
 
 local options = {
-  statuscolumn = " %s%l %=%r ",
+  statuscolumn = " %s%l %r",
   foldlevelstart = 99,
   breakindent = true,
   hlsearch = false,

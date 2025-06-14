@@ -23,7 +23,7 @@ require("mason-lspconfig").setup({
     'jsonls',
     'ast_grep',
     'pyright',
-    'csharp_ls',
+    'omnisharp',
   },
 })
 
@@ -48,7 +48,7 @@ local servers = {
   'jsonls',
   'ast_grep',
   'pyright',
-  'csharp_ls',
+  'omnisharp',
 }
 
 for _, server in pairs(servers) do
@@ -58,13 +58,13 @@ for _, server in pairs(servers) do
 end
 
 -- PRETTIERD SETUP
-lspconfig.prettierd.setup {
-  settings = {
-    useTabs = true,
-    tabWidth = 4,
-    printWidth = 80,
-  },
-}
+-- lspconfig.prettierd.setup {
+--   settings = {
+--     useTabs = true,
+--     tabWidth = 4,
+--     printWidth = 80,
+--   },
+-- }
 
 -- LSP ACTIONS (Autocommands)
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -103,8 +103,7 @@ cmp.setup({
     documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    -- Simple tab complete
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<C-j>'] = cmp.mapping(function(fallback)
       local col = vim.fn.col('.') - 1
       if cmp.visible() then
         cmp.select_next_item({ behavior = 'select' })
@@ -114,8 +113,15 @@ cmp.setup({
         cmp.complete()
       end
     end, { 'i', 's' }),
-    -- Go to previous item
-    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = 'select' }, { 'i', 's' }),
+
+    ['<C-k>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item({ behavior = 'select' })
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
   }),
   completion = {

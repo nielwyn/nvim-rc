@@ -27,7 +27,7 @@ conform.setup({
   },
 })
 
-vim.keymap.set("", "<leader>bf", function()
+vim.keymap.set({ "n", "v" }, "<leader>bf", function()
   require("conform").format({ async = true }, function(err)
     if not err then
       local mode = vim.api.nvim_get_mode().mode
