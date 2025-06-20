@@ -23,7 +23,7 @@ require("mason-lspconfig").setup({
 })
 
 vim.lsp.config('htmx', {
-	  filetypes = { "html", "htmldjango", "ejs" }, -- NOT "typescript" or "javascript"
+	filetypes = { "html", "htmldjango", "ejs" }, -- NOT "typescript" or "javascript"
 })
 
 -- Configure servers individually using vim.lsp.config()
@@ -42,13 +42,37 @@ vim.lsp.config('lua_ls', {
 		},
 	},
 })
+-- Use ONLY OmniSharp for C#
+vim.lsp.config('omnisharp', {
+	cmd = {
+		"omnisharp",
+		"--languageserver",
+		"--hostPID", tostring(vim.fn.getpid())
+	},
+	root_dir = require('lspconfig.util').root_pattern("*.sln", "*.csproj"),
+	filetypes = { "cs" },
+	settings = {
+		FormattingOptions = {
+			EnableEditorConfigSupport = true,
+			OrganizeImports = true,
+		},
+		MsBuild = {
+			LoadProjectsOnDemand = false,
+		},
+		RoslynExtensionsOptions = {
+			EnableAnalyzersSupport = true,
+			EnableImportCompletion = true,
+			AnalyzeOpenDocumentsOnly = false,
+		},
+	},
+})
 
 -- LSP keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
 	desc = 'LSP actions',
 	callback = function(event)
 		local opts = { buffer = event.buf }
-			local lsp = vim.lsp.buf
+		local lsp = vim.lsp.buf
 		vim.keymap.set('n', 'K', lsp.hover, opts)
 		vim.keymap.set('n', 'gd', lsp.definition, opts)
 		vim.keymap.set('n', 'gD', lsp.declaration, opts)
@@ -63,5 +87,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 
 vim.diagnostic.config({
-	signs = false,
+	virtual_text = {
+		prefix = '▎',
+		spacing = 4,
+		severity = vim.diagnostic.severity.ERROR
+	},
+	severity_sort = true,
 })

@@ -2,7 +2,7 @@ vim.opt.whichwrap:append "<>[]hl"
 
 local options = {
   -- UI and Status
-  statuscolumn      = " %s%l %r",      -- Custom status column (requires Neovim 0.9+)
+  statuscolumn      = " %s%l %=%r",      -- Custom status column (requires Neovim 0.9+)
   laststatus        = 3,               -- Global statusline
 
   -- Folds and Indents
