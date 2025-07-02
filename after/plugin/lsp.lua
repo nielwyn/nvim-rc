@@ -1,3 +1,11 @@
+-- Optimize LSP capabilities for speed
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- Disable unused capabilities for speed
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+	properties = { "documentation", "detail", "additionalTextEdits" }
+}
+
 vim.lsp.config("*", {
 	capabilities = vim.lsp.protocol.make_client_capabilities()
 })
@@ -38,6 +46,20 @@ vim.lsp.config('lua_ls', {
 			},
 			workspace = {
 				library = vim.api.nvim_get_runtime_file("", true),
+			},
+		},
+	},
+})
+
+vim.lsp.config('ts_ls', {
+	flags = {
+		debounce_text_changes = 100,
+	},
+	settings = {
+		typescript = {
+			inlayHints = {
+				includeInlayParameterNameHints = "none",
+				includeInlayFunctionParameterTypeHints = false,
 			},
 		},
 	},
@@ -90,7 +112,10 @@ vim.diagnostic.config({
 	virtual_text = {
 		prefix = '▎',
 		spacing = 4,
-		severity = vim.diagnostic.severity.ERROR
+		severity = vim.diagnostic.severity.ERROR,
+		update_in_insert = false
 	},
 	severity_sort = true,
 })
+
+vim.lsp.set_log_level("WARN")
