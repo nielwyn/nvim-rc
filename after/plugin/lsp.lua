@@ -1,13 +1,11 @@
--- Optimize LSP capabilities for speed
 local capabilities = vim.lsp.protocol.make_client_capabilities()
--- Disable unused capabilities for speed
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" }
 }
 
 vim.lsp.config("*", {
-	capabilities = vim.lsp.protocol.make_client_capabilities()
+	capabilities = capabilities -- Use optimized capabilities, not default ones
 })
 
 require("mason").setup({
@@ -64,23 +62,24 @@ vim.lsp.config('ts_ls', {
 		},
 	},
 })
--- Use ONLY OmniSharp for C#
-vim.lsp.config('omnisharp', {
+
+
+local lspconfig = require('lspconfig')
+lspconfig.omnisharp.setup({
+	capabilities = capabilities,
 	cmd = {
-		"omnisharp",
-		"--languageserver",
-		"--hostPID", tostring(vim.fn.getpid())
+		vim.fn.stdpath('data') .. '/mason/packages/omnisharp/omnisharp', -- Full path
+		"--languageserver", 
+		"--hostPID",
+		tostring(vim.fn.getpid())
 	},
-	root_dir = require('lspconfig.util').root_pattern("*.sln", "*.csproj"),
-	filetypes = { "cs" },
+	root_dir = lspconfig.util.root_pattern("*.sln", "*.csproj"),
 	settings = {
 		FormattingOptions = {
 			EnableEditorConfigSupport = true,
 			OrganizeImports = true,
 		},
-		MsBuild = {
-			LoadProjectsOnDemand = false,
-		},
+		MsBuild = { LoadProjectsOnDemand = false },
 		RoslynExtensionsOptions = {
 			EnableAnalyzersSupport = true,
 			EnableImportCompletion = true,
@@ -88,6 +87,46 @@ vim.lsp.config('omnisharp', {
 		},
 	},
 })
+-- vim.lsp.config('omnisharp', {
+-- 	cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+-- 	root_dir = require('lspconfig.util').root_pattern("*.sln", "*.csproj"),
+-- 	filetypes = { "cs" },
+-- 	settings = {
+-- 		FormattingOptions = {
+-- 			EnableEditorConfigSupport = true,
+-- 			OrganizeImports = true,
+-- 		},
+-- 		MsBuild = { LoadProjectsOnDemand = false },
+-- 		RoslynExtensionsOptions = {
+-- 			EnableAnalyzersSupport = true,
+-- 			EnableImportCompletion = true,
+-- 			AnalyzeOpenDocumentsOnly = false,
+-- 		},
+-- 	},
+-- })
+-- vim.lsp.config('omnisharp', {
+-- 	cmd = {
+-- 		"omnisharp",
+-- 		"--languageserver",
+-- 		"--hostPID", tostring(vim.fn.getpid())
+-- 	},
+-- 	root_dir = require('lspconfig.util').root_pattern("*.sln", "*.csproj"),
+-- 	filetypes = { "cs" },
+-- 	settings = {
+-- 		FormattingOptions = {
+-- 			EnableEditorConfigSupport = true,
+-- 			OrganizeImports = true,
+-- 		},
+-- 		MsBuild = {
+-- 			LoadProjectsOnDemand = false,
+-- 		},
+-- 		RoslynExtensionsOptions = {
+-- 			EnableAnalyzersSupport = true,
+-- 			EnableImportCompletion = true,
+-- 			AnalyzeOpenDocumentsOnly = false,
+-- 		},
+-- 	},
+-- })
 
 -- LSP keymaps
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -113,9 +152,9 @@ vim.diagnostic.config({
 		prefix = '▎',
 		spacing = 4,
 		severity = vim.diagnostic.severity.ERROR,
-		update_in_insert = false
 	},
 	severity_sort = true,
+	update_in_insert = false
 })
 
 vim.lsp.set_log_level("WARN")

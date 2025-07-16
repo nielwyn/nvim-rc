@@ -26,5 +26,10 @@ require("trouble").setup({
 				},
 			},
 		},
-	}
+	},
+	throttle = {
+		refresh = 20,
+		update = 10,
+	},
+	auto_close = true,
 })
