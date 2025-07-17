@@ -20,8 +20,8 @@ vim.keymap.set("v", "q", "<Nop>")
 vim.keymap.set({ 'n', 'v' }, 'x', '"_x')
 
 -- move whole line
-vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv", { silent = true, desc = "Move selection down" })
-vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv", { silent = true, desc = "Move selection up" })
+vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv", { silent = true, desc = "Move selection down", remap = false })
+vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv", { silent = true, desc = "Move selection up", remap = false })
 
 -- search term stay in middle
 vim.keymap.set("n", "n", "nzz")
