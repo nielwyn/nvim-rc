@@ -139,7 +139,7 @@ ins_right {
 
 ins_right {
 	'diff',
-	symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+	symbols = { added = ' ', modified = ' ', removed = ' ' },
 	cond = conditions.hide_in_width,
 }
 
