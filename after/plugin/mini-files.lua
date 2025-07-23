@@ -1,4 +1,4 @@
-require('mini.files').setup({
+require('mini.files').setup {
 	-- Customization of shown content
 	content = {
 		-- Predicate for which file system entries to show
@@ -48,8 +48,5 @@ require('mini.files').setup({
 		-- Width of preview window
 		width_preview = 25,
 	},
-})
+}
 
-vim.keymap.set('n', '<leader>be', function()
-  require('mini.files').open(vim.api.nvim_buf_get_name(0), true)
-end, { desc = 'Open mini.files at current buffer' })

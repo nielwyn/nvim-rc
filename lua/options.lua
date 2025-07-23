@@ -1,4 +1,4 @@
-vim.opt.whichwrap:append "<>[]hl"
+vim.opt.whichwrap:append "<>[]hl" -- Seemlessly move between lines
 
 local options = {
   -- UI and Status

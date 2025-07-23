@@ -1,6 +1,6 @@
-require('mini.cursorword').setup({
+require('mini.cursorword').setup {
 	delay = 100
-})
+}
 
 local timer = nil
 _G.cursorword_blocklist = function()

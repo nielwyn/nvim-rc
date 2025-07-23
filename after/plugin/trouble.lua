@@ -1,4 +1,4 @@
-require("trouble").setup({
+require("trouble").setup {
 	icons = {
 		indent = {
 			middle = " ",
@@ -59,10 +59,10 @@ require("trouble").setup({
 	fold_open = "v",
 	fold_closed = ">",
 	indent_lines = false, -- Disable for better performance
-})
+}
 
 -- Add diagnostic configuration for better performance
-vim.diagnostic.config({
+vim.diagnostic.config {
 	virtual_text = {
 		prefix = "●",
 		source = "if_many",
@@ -79,7 +79,7 @@ vim.diagnostic.config({
 		header = "",
 		prefix = "",
 	},
-})
+}
 
 -- Auto-refresh trouble when diagnostics change
 vim.api.nvim_create_autocmd("DiagnosticChanged", {

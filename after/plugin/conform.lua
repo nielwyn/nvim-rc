@@ -1,6 +1,4 @@
-local conform = require("conform")
-
-conform.setup({
+require('conform').setup {
 	formatters_by_ft = {
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
@@ -21,17 +19,4 @@ conform.setup({
 	formatters = {
 		shfmt = { prepend_args = { "-i", "2" } },
 	},
-})
-
-vim.keymap.set({ "n", "v" }, "<leader>bf", function()
-	local mode = vim.api.nvim_get_mode().mode
-	local range
-	if mode:match("[vV]") then
-		range = { vim.fn.line("v"), vim.fn.line("."), vim.fn.col("v"), vim.fn.col(".") }
-	end
-	require("conform").format({ async = true, range = range }, function(err)
-		if not err and mode:match("[vV]") then
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
-		end
-	end)
-end, { desc = "Format code" })
+}

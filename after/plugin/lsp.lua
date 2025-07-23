@@ -20,7 +20,7 @@ require("mason").setup({
 	},
 })
 
-require("mason-lspconfig").setup({
+require("mason-lspconfig").setup {
 	ensure_installed = {
 		'ast_grep',
 		'bashls',
@@ -38,7 +38,7 @@ require("mason-lspconfig").setup({
 		'vimls',
 	},
 	automatic_installation = true,
-})
+}
 
 vim.lsp.config('htmx', {
 	filetypes = { "html", "htmldjango", "ejs" }, -- NOT "typescript" or "javascript"
@@ -64,7 +64,7 @@ vim.lsp.config('ts_ls', {
 
 
 local lspconfig = require('lspconfig')
-lspconfig.omnisharp.setup({
+lspconfig.omnisharp.setup {
 	capabilities = capabilities,
 	cmd = {
 		vim.fn.stdpath('data') .. '/mason/packages/omnisharp/omnisharp', -- Full path
@@ -85,7 +85,7 @@ lspconfig.omnisharp.setup({
 			AnalyzeOpenDocumentsOnly = false,
 		},
 	},
-})
+}
 
 -- LSP keymaps: use more reliable on_attach (future-proof)
 local function lsp_on_attach(event)

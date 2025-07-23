@@ -1,9 +1,9 @@
 local cmp = require('cmp')
 
-cmp.setup({
+cmp.setup {
 	sources = cmp.config.sources({
 		{
-			name = "nvim_lsp",
+			name = 'nvim_lsp',
 			max_item_count = 20,
 			priority_weight = 1000,
 			-- Add trigger characters for faster LSP completion
@@ -90,4 +90,4 @@ cmp.setup({
 		async_budget = 1,
 		max_view_entries = 200,
 	},
-})
+}
