@@ -18,7 +18,7 @@ local config = {
 	options = {
 		component_separators = '',
 		section_separators = '',
-		theme = "catppuccin",
+		theme = "tokyonight-night",
 	},
 	sections = {
 		lualine_a = {},
@@ -49,28 +49,29 @@ end
 ins_left {
 	function() return '' end,
 	color = function()
-		local cp = require("catppuccin.palettes").get_palette()
+		-- Use tokyonight palette for mode color
+		local tn = require("tokyonight.colors").setup()
 		local mode_color = {
-			n = cp.red,
-			i = cp.green,
-			v = cp.blue,
-			[''] = cp.blue,
-			V = cp.blue,
-			c = cp.mauve,
-			no = cp.red,
-			s = cp.yellow,
-			S = cp.yellow,
-			[''] = cp.yellow,
-			ic = cp.yellow,
-			R = cp.maroon,
-			Rv = cp.maroon,
-			cv = cp.red,
-			ce = cp.red,
-			r = cp.teal,
-			rm = cp.teal,
-			['r?'] = cp.teal,
-			['!'] = cp.red,
-			t = cp.red,
+			n = tn.red,
+			i = tn.green,
+			v = tn.blue,
+			[''] = tn.blue,
+			V = tn.blue,
+			c = tn.magenta,
+			no = tn.red,
+			s = tn.yellow,
+			S = tn.yellow,
+			[''] = tn.yellow,
+			ic = tn.yellow,
+			R = tn.orange,
+			Rv = tn.orange,
+			cv = tn.red,
+			ce = tn.red,
+			r = tn.cyan,
+			rm = tn.cyan,
+			['r?'] = tn.cyan,
+			['!'] = tn.red,
+			t = tn.red,
 		}
 		return { fg = mode_color[vim.fn.mode()] }
 	end,

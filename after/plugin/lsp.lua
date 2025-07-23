@@ -1,12 +1,14 @@
+-- Build capabilities only once and extend with cmp_nvim_lsp if available
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities.textDocument.completion.completionItem.resolveSupport = {
 	properties = { "documentation", "detail", "additionalTextEdits" }
 }
-
-vim.lsp.config("*", {
-	capabilities = capabilities -- Use optimized capabilities, not default ones
-})
+-- If using nvim-cmp, further enhance capabilities
+local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if ok_cmp then
+	capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+end
 
 require("mason").setup({
 	ui = {
@@ -18,7 +20,6 @@ require("mason").setup({
 	},
 })
 
--- Note: Updated repository location and new API
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		'ast_grep',
@@ -36,7 +37,7 @@ require("mason-lspconfig").setup({
 		'ts_ls',
 		'vimls',
 	},
-	automatic_enable = true, -- This replaces the old setup_handlers
+	automatic_installation = true,
 })
 
 vim.lsp.config('htmx', {
@@ -86,23 +87,25 @@ lspconfig.omnisharp.setup({
 	},
 })
 
--- LSP keymaps
+-- LSP keymaps: use more reliable on_attach (future-proof)
+local function lsp_on_attach(event)
+	local opts = { buffer = event.buf }
+	local lsp = vim.lsp.buf
+	vim.keymap.set('n', 'K', lsp.hover, opts)
+	vim.keymap.set('n', 'gd', lsp.definition, opts)
+	vim.keymap.set('n', 'gD', lsp.declaration, opts)
+	vim.keymap.set('n', 'gi', lsp.implementation, opts)
+	vim.keymap.set('n', 'go', lsp.type_definition, opts)
+	vim.keymap.set('n', 'gr', lsp.references, opts)
+	vim.keymap.set('n', 'gs', lsp.signature_help, opts)
+	vim.keymap.set('n', '<F2>', lsp.rename, opts)
+	vim.keymap.set({ 'n', 'x' }, '<F3>', function() lsp.format { async = true } end, opts)
+	vim.keymap.set('n', '<F4>', lsp.code_action, opts)
+end
+
 vim.api.nvim_create_autocmd('LspAttach', {
 	desc = 'LSP actions',
-	callback = function(event)
-		local opts = { buffer = event.buf }
-		local lsp = vim.lsp.buf
-		vim.keymap.set('n', 'K', lsp.hover, opts)
-		vim.keymap.set('n', 'gd', lsp.definition, opts)
-		vim.keymap.set('n', 'gD', lsp.declaration, opts)
-		vim.keymap.set('n', 'gi', lsp.implementation, opts)
-		vim.keymap.set('n', 'go', lsp.type_definition, opts)
-		vim.keymap.set('n', 'gr', lsp.references, opts)
-		vim.keymap.set('n', 'gs', lsp.signature_help, opts)
-		vim.keymap.set('n', '<F2>', lsp.rename, opts)
-		vim.keymap.set({ 'n', 'x' }, '<F3>', function() lsp.format { async = true } end, opts)
-		vim.keymap.set('n', '<F4>', lsp.code_action, opts)
-	end,
+	callback = lsp_on_attach,
 })
 
 -- vim.lsp.set_log_level("WARN")
