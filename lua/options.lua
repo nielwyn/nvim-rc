@@ -8,9 +8,10 @@ local options = {
   -- Folds and Indents
   foldlevelstart    = 99,              -- Open all folds by default
   breakindent       = true,            -- Enable break indent
-  softtabstop       = 2,               -- Number of spaces per <Tab> in insert mode
+  expandtab         = true,            -- Convert tabs to spaces
+  softtabstop       = 8,               -- Number of spaces per <Tab> in insert mode
   shiftwidth        = 2,               -- Number of spaces for each indentation
-  tabstop           = 2,               -- Number of spaces that a <Tab> in the file counts for
+  tabstop           = 8,               -- Number of spaces that a <Tab> in the file counts for
 
   -- Search
   hlsearch          = false,           -- Don't highlight search results
