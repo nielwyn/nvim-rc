@@ -3,10 +3,10 @@ local harpoon_extensions = require("harpoon.extensions")
 
 -- REQUIRED
 harpoon:setup({
-	settings = {
-		save_on_toggle = true,
-		sync_on_ui_close = false
-	}
+  settings = {
+    save_on_toggle = true,
+    sync_on_ui_close = false
+  }
 })
 -- REQUIRED
 
