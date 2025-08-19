@@ -29,7 +29,6 @@ require("mason-lspconfig").setup {
     'cssls',
     'gopls',
     'html',
-    'htmx',
     'jsonls',
     'lua_ls',
     'omnisharp',
@@ -38,31 +37,23 @@ require("mason-lspconfig").setup {
     'ts_ls',
     'vimls',
     'swift_mesonls',
-    'jdtls'
+    'jdtls',
   },
   automatic_installation = true,
 }
 
-vim.lsp.config('htmx', {
-  filetypes = { "html", "htmldjango", "ejs" },
-})
-
 vim.lsp.config('ts_ls', {
-  flags = {
-    debounce_text_changes = 100,
+  init_options = { hostInfo = 'neovim' },
+  cmd = { 'typescript-language-server', '--stdio' },
+  filetypes = {
+    'javascript',
+    'javascriptreact',
+    'javascript.jsx',
+    'typescript',
+    'typescriptreact',
+    'typescript.tsx',
   },
-  settings = {
-    typescript = {
-      preferences = {
-        exclude = { "node_modules", "out", "build", "third_party", "gen" }
-      },
-    },
-    javascript = {
-      preferences = {
-        exclude = { "node_modules", "out", "build", "third_party", "gen" }
-      }
-    }
-  },
+  root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
 })
 
 
@@ -121,5 +112,3 @@ vim.api.nvim_create_autocmd('LspAttach', {
   desc = 'LSP actions',
   callback = lsp_on_attach,
 })
-
--- vim.lsp.set_log_level("WARN")

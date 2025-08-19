@@ -2,6 +2,7 @@ require("config.lazy")
 require("options")
 require("keymap")
 require("theme")
+require("dashboard")
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, { pattern = "*", command = "redrawstatus" })
 

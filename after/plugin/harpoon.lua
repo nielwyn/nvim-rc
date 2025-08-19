@@ -5,8 +5,11 @@ local harpoon_extensions = require("harpoon.extensions")
 harpoon:setup({
   settings = {
     save_on_toggle = true,
-    sync_on_ui_close = false
-  }
+    sync_on_ui_close = true,
+    key = function()
+      return vim.uv.cwd()
+    end,
+  },
 })
 -- REQUIRED
 

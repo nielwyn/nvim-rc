@@ -42,9 +42,7 @@ local options = {
   sidescrolloff  = 9,        -- Minimal number of screen columns to the side of cursor
 
   -- Performance
-  timeoutlen     = 500,      -- Time in ms to wait for a mapped sequence
-  updatetime     = 100,      -- Faster completion
-  lazyredraw     = false,    -- Don't lazy redraw (default false)
+  updatetime     = 50,      -- Faster completion
 
   -- Appearance
   termguicolors  = true,    -- Enable GUI colors in terminal

@@ -30,6 +30,9 @@ require("trouble").setup {
       mode = "diagnostics",
       filter = { buf = 0 }, -- Only current buffer
     },
+    filter = {
+      severity = { vim.diagnostic.severity.ERROR },
+    },
   },
 
   -- Lowered refresh/update intervals for less overhead

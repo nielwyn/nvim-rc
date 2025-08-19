@@ -1,7 +1,6 @@
 local harpoon = package.loaded.harpoon
 local gitsigns = package.loaded.gitsigns
 local mini_files = package.loaded['mini.files']
-local conform = package.loaded.conform
 
 -- Create a smart keymap wrapper using metatables
 local keymap = {}
@@ -92,9 +91,9 @@ map.n {
 }
 
 map.v {
-  ['y'] = '"+y',              -- Yank to clipboard in visual mode
-  ['<'] = '<gv',              -- Indent and keep selection
-  ['>'] = '>gv',              -- Outdent and keep selection
+  ['y'] = '"+y',               -- Yank to clipboard in visual mode
+  ['<'] = '<gv',               -- Indent and keep selection
+  ['>'] = '>gv',               -- Outdent and keep selection
   ['<C-j>'] = ":m '>+1<CR>gv", -- Move selection down
   ['<C-k>'] = ":m '<-2<CR>gv", -- Move selection up
 }
@@ -113,11 +112,22 @@ map.nv("<leader>bf", function()
   if mode:match("[vV]") then
     range = { vim.fn.line("v"), vim.fn.line("."), vim.fn.col("v"), vim.fn.col(".") }
   end
-  conform.format({ async = true, range = range }, function(err)
-    if not err and mode:match("[vV]") then
+
+  local ok, conform = pcall(require, "conform")
+
+  if ok and conform then
+    conform.format({ async = true, range = range }, function(err)
+      if not err and mode:match("[vV]") then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+      end
+    end)
+  else
+    -- Fallback to LSP formatting
+    vim.lsp.buf.format({ async = true })
+    if mode:match("[vV]") then
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
     end
-  end)
+  end
 end)
 
 ------------------------------------------------------------------------
