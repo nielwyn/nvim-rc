@@ -3,16 +3,15 @@ vim.opt.whichwrap:append "<>[]hl" -- Seemlessly move between lines
 local options = {
   -- UI and Status
   statuscolumn   = " %s%l%=%r",    -- Custom status column (requires Neovim 0.9+)
-  laststatus     = 3,              -- Global statusline
+  -- laststatus     = 3,              -- Global statusline
 
   -- Folds and Indents
   foldlevelstart = 99,      -- Open all folds by default
   breakindent    = true,    -- Enable break indent
   expandtab      = true,    -- Convert tabs to spaces
-  softtabstop    = 8,       -- Number of spaces per <Tab> in insert mode
+  softtabstop    = 4,       -- Number of spaces per <Tab> in insert mode
+  tabstop        = 4,       -- Number of spaces that a <Tab> in the file counts for
   shiftwidth     = 2,       -- Number of spaces for each indentation
-  tabstop        = 8,       -- Number of spaces that a <Tab> in the file counts for
-
   -- Search
   hlsearch       = false,    -- Don't highlight search results
   incsearch      = true,     -- Show search matches as you type
@@ -34,12 +33,15 @@ local options = {
   -- Mouse and UI
   mouse          = "a",      -- Enable mouse in all modes
   showmode       = false,    -- Don't show -- INSERT -- etc.
+  number         = true,     -- Show absolute line numbers
   relativenumber = true,     -- Show relative line numbers
   numberwidth    = 5,        -- Set line number column width
   signcolumn     = "yes",    -- Always show sign column
   wrap           = false,    -- Don't wrap lines
   scrolloff      = 9,        -- Minimal number of screen lines above/below cursor
   sidescrolloff  = 9,        -- Minimal number of screen columns to the side of cursor
+
+  winborder       = "single",
 
   -- Performance
   updatetime     = 50,      -- Faster completion

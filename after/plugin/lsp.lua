@@ -1,26 +1,3 @@
--- Build capabilities only once and extend with cmp_nvim_lsp if available
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = { "documentation", "detail", "additionalTextEdits" }
-}
-
--- If using nvim-cmp, further enhance capabilities
-local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if ok_cmp then
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
-end
-
-require("mason").setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-
 require("mason-lspconfig").setup {
   ensure_installed = {
     'ast_grep',
@@ -42,7 +19,13 @@ require("mason-lspconfig").setup {
   automatic_installation = true,
 }
 
-vim.lsp.config('ts_ls', {
+local lspconfig = require('lspconfig')
+local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+lspconfig['lua_ls'].setup { capabilities = capabilities }
+
+lspconfig['ts_ls'].setup {
+  capabilities = capabilities,
   init_options = { hostInfo = 'neovim' },
   cmd = { 'typescript-language-server', '--stdio' },
   filetypes = {
@@ -54,12 +37,9 @@ vim.lsp.config('ts_ls', {
     'typescript.tsx',
   },
   root_markers = { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' },
-})
+}
 
-
-local lspconfig = require('lspconfig')
-
-lspconfig.omnisharp.setup {
+lspconfig['omnisharp'].setup {
   capabilities = capabilities,
   cmd = {
     vim.fn.stdpath('data') .. '/mason/packages/omnisharp/omnisharp', -- Full path
@@ -82,17 +62,10 @@ lspconfig.omnisharp.setup {
   },
 }
 
-lspconfig.sourcekit.setup {
-  capabilities = {
-    workspace = {
-      didChangeWatchedFiles = {
-        dynamicRegistration = true,
-      },
-    },
-  },
+lspconfig['sourcekit'].setup {
+  capabilities = capabilities,
 }
 
--- LSP keymaps: use more reliable on_attach (future-proof)
 local function lsp_on_attach(event)
   local opts = { buffer = event.buf }
   local lsp = vim.lsp.buf

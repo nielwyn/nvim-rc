@@ -80,20 +80,3 @@ vim.diagnostic.config {
     prefix = "",
   },
 }
-
--- Debounce Trouble refresh to avoid rapid consecutive calls
-local trouble_refresh_timer
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-  callback = function()
-    if require("trouble").is_open() then
-      if trouble_refresh_timer then
-        trouble_refresh_timer:stop()
-        trouble_refresh_timer:close()
-      end
-      trouble_refresh_timer = vim.loop.new_timer()
-      trouble_refresh_timer:start(80, 0, vim.schedule_wrap(function()
-        require("trouble").refresh()
-      end))
-    end
-  end,
-})

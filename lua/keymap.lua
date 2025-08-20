@@ -78,24 +78,21 @@ local cmd = function(command)
 end
 
 ------------------------------------------------------------------------
--- NO-PLUGIN (CORE) MAPPINGS
+-- CORE MAPPINGS
 ------------------------------------------------------------------------
 
 map.nv {
-  ['y'] = '"+y', -- Yank to clipboard
+  ['y'] = '"+y',
   ['x'] = '"_x', -- Delete without yanking
 }
 
 map.n {
-  ['Y'] = '"+Y', -- Yank line to clipboard
+  ['Y'] = '"+Y',
 }
 
 map.v {
-  ['y'] = '"+y',               -- Yank to clipboard in visual mode
-  ['<'] = '<gv',               -- Indent and keep selection
-  ['>'] = '>gv',               -- Outdent and keep selection
-  ['<C-j>'] = ":m '>+1<CR>gv", -- Move selection down
-  ['<C-k>'] = ":m '<-2<CR>gv", -- Move selection up
+  ['<C-j>'] = ":m '>+1<CR>gv",
+  ['<C-k>'] = ":m '<-2<CR>gv",
 }
 
 -- Copy buffer path to clipboard

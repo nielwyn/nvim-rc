@@ -12,5 +12,5 @@ vim.api.nvim_set_hl(0, 'GitSignsTopDelete', { fg = "#ff966c", bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'GitSignsChangeDelete', { fg = "#ff966c", bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'GitSignsUntracked', { fg = "#82aaff", bg = 'NONE' })
 
-vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', { fg = "#ffc777" })
-vim.api.nvim_set_hl(0, 'MiniCursorword', { fg = "#ffc777" })
+vim.api.nvim_set_hl(0, 'MiniCursorwordCurrent', { fg = "#ff9e64" })
+vim.api.nvim_set_hl(0, 'MiniCursorword', { fg = "#ff9e64" })
